@@ -1,1 +1,0 @@
-Bu proje için README dosyası oluşturulmuştur.
