@@ -36,6 +36,8 @@ public class WorkSearch {
 
     public WebElement isDetaydakiKaydetButonu;
 
+    // WWebElement Locate leri icin açıklama kısmı yazıldı
+
 
 
 
