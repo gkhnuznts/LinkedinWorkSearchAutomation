@@ -86,15 +86,6 @@ public class LinkedinOturumAc extends Driver {
 
         ReusableMethods.bekle(1);
 
-        /*
-
-            String actualSonucYazisi = (workSearch.aramasonucu.getText());
-
-        String expectedSonucYazisi = "380 sonuç";
-
-        Assert.assertEquals(actualSonucYazisi,expectedSonucYazisi);
-
-         */
 
 
 
@@ -115,8 +106,6 @@ public class LinkedinOturumAc extends Driver {
             job.click();
             Thread.sleep(2000);  // wait for job details to load
 
-            // Check for the presence of the "Meet the hiring team" section
-            //List<WebElement> hiringTeamSection = driver.findElements(By.xpath("//h3[contains(text(), 'Meet the hiring team')]"));
             if (workSearch.iseAlimTakimiAlani.isDisplayed()) {
 
                 workSearch.isDetaydakiKaydetButonu.click();
@@ -130,8 +119,7 @@ public class LinkedinOturumAc extends Driver {
                 driver.navigate().back();
             }
 
-            // Navigate back to job listings
-            //driver.navigate().back();
+
             Thread.sleep(2000);  // wait for job listings to load again
 
 
