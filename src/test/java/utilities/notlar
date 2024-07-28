@@ -1,0 +1,80 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+public class LinkedInJobSearch {
+    WebDriver driver;
+    String baseUrl = "https://www.linkedin.com";
+
+    @BeforeClass
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+    }
+
+    @Test
+    public void jobSearch() throws InterruptedException {
+        driver.get(baseUrl);
+
+        // Login
+        driver.findElement(By.id("session_key")).sendKeys("your-email@example.com");
+        driver.findElement(By.id("session_password")).sendKeys("your-password");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+
+        // Search for QA engineer
+        WebElement searchBox = driver.findElement(By.xpath("//input[@placeholder='Search']"));
+        searchBox.sendKeys("QA engineer");
+        searchBox.submit();
+
+        // Wait for search results to load
+        Thread.sleep(3000);
+
+        // Click on Jobs filter
+        driver.findElement(By.xpath("//button[text()='Jobs']")).click();
+
+        // Wait for job listings to load
+        Thread.sleep(3000);
+
+        // Get the list of job postings
+        List<WebElement> jobListings = driver.findElements(By.cssSelector(".job-card-list__title"));
+
+        for (WebElement job : jobListings) {
+            job.click();
+            Thread.sleep(2000);  // wait for job details to load
+
+            // Check for the presence of the "Meet the hiring team" section
+            List<WebElement> hiringTeamSection = driver.findElements(By.xpath("//h3[contains(text(), 'Meet the hiring team')]"));
+            if (hiringTeamSection.isEmpty()) {
+                System.out.println("No 'Meet the hiring team' section for this job.");
+            } else {
+                System.out.println("'Meet the hiring team' section found for this job.");
+                // Do something if the section is found
+            }
+
+            // Navigate back to job listings
+            driver.navigate().back();
+            Thread.sleep(2000);  // wait for job listings to load again
+        }
+    }
+
+    @AfterClass
+    public void tearDown() {
+        driver.quit();
+    }
+}
+
+
+mh4 pt4 pb3 İşe alım takımı ile tanışın ın div ELEMENTİ
+
